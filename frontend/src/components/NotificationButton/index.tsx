@@ -3,18 +3,19 @@ import icon from "../../assets/img/notification-icon.svg";
 
 import "./styles.css";
 import { BASE_URL } from "../../utils/request";
+import { toast } from "react-toastify";
 
 type Props = {
   saleId: number;
 };
 
-function NotificationButton({ saleId }: Props) {
-  function handleClick(id: number) {
-    axios(`${BASE_URL}/sales/${id}/notification`).then((response) => {
-      console.log("SUCESSO");
-    });
-  }
+function handleClick(id: number) {
+  axios(`${BASE_URL}/sales/${id}/notification`).then(() => {
+    toast.info("SMS enviado com sucesso!");
+  });
+}
 
+function NotificationButton({ saleId }: Props) {
   return (
     <div className="dsmeta-red-btn" onClick={() => handleClick(saleId)}>
       <img src={icon} alt="Notificar" />
